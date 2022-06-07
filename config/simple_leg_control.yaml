@@ -1,0 +1,11 @@
+joint_state_controller:
+  type: joint_state_controller/JointStateController
+  publish_rate: 100
+
+Hip_position_controller:
+  type: position_controllers/JointPositionController
+  joint: Hip
+
+Knee_position_controller:
+  type: position_controllers/JointPositionController
+  joint: Knee

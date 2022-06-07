@@ -1,0 +1,4 @@
+<launch>
+  <arg name="rviz_config" default="$(find choreonoid_ros_control_sample)/launch/config/display.rviz"/>
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(arg rviz_config)"/>
+</launch>

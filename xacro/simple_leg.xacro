@@ -1,0 +1,148 @@
+<?xml version="1.0"?>
+<robot name="simple_leg" xmlns:xacro="http://www.ros.org/wiki/xacro">
+    <!-- Constants -->
+    <xacro:property name="Baselink_x" value="0.1"/>
+    <xacro:property name="Baselink_y" value="0.1"/>
+    <xacro:property name="Baselink_z" value="0.1"/>
+    <xacro:property name="l1" value="0.15"/>
+    <xacro:property name="l2" value="0.15"/>
+
+    <!-- Color settings -->
+    <material name="red">
+        <color rgba="1.0 0.0 0.0 1.0"/>
+    </material>
+    <material name="blue">
+        <color rgba="0.0 0.0 1.0 1.0"/>
+    </material>
+    <material name="white">
+        <color rgba="1.0 1.0 1.0 1.0"/>
+    </material>
+
+    <!-- Description of robot -->
+    <link name="base_footprint"/>
+
+    <!-- Baselink -->
+    <joint name="Base_joint" type="fixed">
+        <parent link="base_footprint"/>
+        <child link="Base_link"/>
+        <origin rpy="0 0 0" xyz="0 0 0.3"/>
+    </joint>
+    <link name="Base_link">
+        <visual>
+            <origin rpy="0 0 0" xyz="0 0 0"/>
+            <geometry>
+                <box size="${Baselink_x} ${Baselink_y} ${Baselink_z}"/>
+            </geometry>
+            <material name="blue"/>
+        </visual>
+        <collision>
+            <origin rpy="0 0 0" xyz="0 0 0"/>
+            <geometry>
+                <box size="${Baselink_x} ${Baselink_y} ${Baselink_z}"/>
+            </geometry>
+        </collision>
+        <inertial>
+            <mass value="5.0"/>
+            <inertia ixx="5.0" ixy="0" ixz="0" iyy="5.0" iyz="0" izz="5.0"/>
+        </inertial>
+    </link>
+
+    <!-- Hip_joint & UpperThigh_link -->
+    <joint name="Hip" type="revolute">
+        <parent link="Base_link"/>
+        <child link="UpperThigh"/>
+        <axis xyz="0 1 0"/>
+        <origin rpy="0 0 0" xyz="0 0 0"/>
+        <limit effort="1000" lower="${radians(-90)}" upper="${radians(90)}" velocity="100.0"/>
+    </joint>
+    <link name="UpperThigh">
+        <visual>
+            <origin rpy="0 0 0" xyz="0 0 -${l1/2}"/>
+            <geometry>
+                <box size="0.05 0.05 ${l1}"/>
+            </geometry>
+            <material name="white"/>
+        </visual>
+        <collision>
+            <origin rpy="0 0 0" xyz="0 0 -${l1/2}"/>
+            <geometry>
+                <box size="0.05 0.05 ${l1}"/>
+            </geometry>
+        </collision>
+        <inertial>
+            <mass value="1.0"/>
+            <inertia ixx="1.0" ixy="0" ixz="0" iyy="1.0" iyz="0" izz="1.0"/>
+        </inertial>
+    </link>
+
+
+    <!-- Knee_joint & LowerThigh_link -->
+    <joint name="Knee" type="revolute">
+        <parent link="UpperThigh"/>
+        <child link="LowerThigh"/>
+        <axis xyz="0 1 0"/>
+        <origin rpy="0 0 0" xyz="0 0 -${l1}"/>
+        <limit effort="1000" lower="${radians(-90)}" upper="${radians(90)}" velocity="100.0"/>
+    </joint>
+    <link name="LowerThigh">
+        <visual>
+            <origin rpy="0 0 0" xyz="0 0 -${l2/2}"/>
+            <geometry>
+                <box size="0.05 0.05 ${l2}"/>
+            </geometry>
+            <material name="white"/>
+        </visual>
+        <collision>
+            <origin rpy="0 0 0" xyz="0 0 -${l2/2}"/>
+            <geometry>
+                <box size="0.05 0.05 ${l2}"/>
+            </geometry>
+        </collision>
+        <inertial>
+            <mass value="1.0"/>
+            <inertia ixx="1.0" ixy="0" ixz="0" iyy="1.0" iyz="0" izz="1.0"/>
+        </inertial>
+    </link>
+
+    <!-- Actuator Settings -->
+    <transmission name="Hip_trans"  type="SimpleTransmission">
+        <type>transmission_interface/SimpleTransmission</type>
+        <joint name="Hip">
+            <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+        </joint>
+        <actuator name="Hip_motor">
+            <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+            <mechanicalReduction>1</mechanicalReduction>
+        </actuator>
+    </transmission>
+
+    <transmission name="Knee_trans"  type="SimpleTransmission">
+        <type>transmission_interface/SimpleTransmission</type>
+        <joint name="Knee">
+            <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+        </joint>
+        <actuator name="Knee_motor">
+            <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+            <mechanicalReduction>1</mechanicalReduction>
+        </actuator>
+    </transmission>
+
+    <gazebo><!-- Do I have to write it down? -->
+        <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
+            <robotNamespace>/simple_leg</robotNamespace>
+            <robotSimType>gazebo_ros_control/DefaultRobotHWSim</robotSimType>
+        </plugin>
+    </gazebo>
+    <!-- Gazebo color setting -->
+    <gazebo reference="Baselink">
+        <material>Gazebo/Blue</material>
+    </gazebo>
+
+    <gazebo reference="UpperThigh">
+        <material>Gazebo/White</material>
+    </gazebo>
+
+    <gazebo reference="LowerThigh">
+        <material>Gazebo/White</material>
+    </gazebo>
+</robot>
