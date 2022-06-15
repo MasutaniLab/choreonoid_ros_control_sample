@@ -1,0 +1,4 @@
+<launch>
+    <node name="choreonoid_ros" pkg="choreonoid_ros" type="choreonoid" args="$(find choreonoid_ros_control_sample)/project/simple_leg.cnoid"/>
+    <include file="$(find choreonoid_ros_control_sample)/launch/simple_leg_control_group.launch"/>
+</launch>

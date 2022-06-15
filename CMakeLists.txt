@@ -149,11 +149,15 @@ include_directories(
 #   ${catkin_LIBRARIES}
 # )
 
-add_executable(sinewave_command src/sinewave_command.cpp)
-add_dependencies(sinewave_command ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
-target_link_libraries(sinewave_command ${catkin_LIBRARIES})
+  add_executable(sinewave_command src/sinewave_command.cpp)
+  add_dependencies(sinewave_command ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+  target_link_libraries(sinewave_command ${catkin_LIBRARIES})
 
-#############
+  add_executable(sinewave_command_group src/sinewave_command_group.cpp)
+  add_dependencies(sinewave_command_group ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+  target_link_libraries(sinewave_command_group ${catkin_LIBRARIES})
+
+  #############
 ## Install ##
 #############
 
