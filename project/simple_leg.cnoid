@@ -46,33 +46,23 @@ items:
           children: 
             - 
               id: 3
-              name: "BodyROS"
-              plugin: ROS
-              class: BodyROSItem
-              data: 
-                body_ros_version: 0
-                joint_state_update_rate: 100
-            - 
-              id: 4
               name: "ROSControl"
               plugin: ROS
               class: ROSControlItem
-              is_selected: true
               data: 
                 name_space: simple_leg
         - 
-          id: 5
+          id: 4
           name: "WorldROS"
           plugin: ROS
           class: WorldROSItem
           data: 
             max_clock_publishing_rate: 100
         - 
-          id: 6
+          id: 5
           name: "AISTSimulator"
           plugin: Body
           class: AISTSimulatorItem
-          is_selected: true
           data: 
             timeStep: 0.001
             realtimeSync: true
@@ -146,7 +136,7 @@ views:
           isCurrent: true
           eye: [ 0.803933, 0.383608, 0.358986 ]
           direction: [ -0.880451, -0.440225, -0.17609 ]
-          up: [ -0.1575, -0.0787497, 0.984374 ]
+          up: [ -0.1575, -0.0787496, 0.984374 ]
         - 
           camera: [ System, Orthographic ]
           orthoHeight: 20
@@ -243,6 +233,28 @@ toolbars:
     snapDistance: 0.025
     penetrationBlockDepth: 0.0005
     lazyCollisionDetectionMode: true
+  "BodyMotionGenerationBar": 
+    autoGenerationForNewBody: true
+    balancer: false
+    autoGeneration: false
+    timeScaleRatio: 1
+    preInitialDuration: 1
+    postFinalDuration: 1
+    onlyTimeBarRange: false
+    makeNewBodyItem: true
+    stealthyStepMode: true
+    stealthyHeightRatioThresh: 2
+    flatLiftingHeight: 0.005
+    flatLandingHeight: 0.005
+    impactReductionHeight: 0.005
+    impactReductionTime: 0.04
+    autoZmp: true
+    minZmpTransitionTime: 0.1
+    zmpCenteringTimeThresh: 0.03
+    zmpTimeMarginBeforeLiftingSpin: 0
+    zmpMaxDistanceFromCenter: 0.02
+    allLinkPositions: false
+    lipSyncMix: false
 Body: 
   "BodySelectionManager": 
     current_body_item: 2
