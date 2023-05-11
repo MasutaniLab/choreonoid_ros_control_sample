@@ -6,30 +6,30 @@
 
 - Install
   ```
-  mkdir -p ws/src
-  cd ws/src
-  git clone 
-  cd ws
+  mkdir -p $ws/src
+  cd $ws/src
+  git clone https://github.com/MasutaniLab/choreonoid_ros_control_sample
+  cd $ws
   catkin build
   ```
 
 - Terminal 1
   ```
-  cd ws
+  cd $ws
   source devel/setup.bash
   roslaunch choreonoid_ros_control_sample bringup.launch
   ```
 
 - Terminal 2
   ```
-  cd ws
+  cd $ws
   source devel/setup.bash
   roslaunch choreonoid_ros_control_sample display.launch 
   ```
 
 - Terminal 3
   ```
-  cd ws
+  cd $ws
   source devel/setup.bash
   rosrun choreonoid_ros_control_sample sinewave_command 
   ```
