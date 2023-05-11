@@ -2,7 +2,7 @@
 
 - Based on https://qiita.com/FAL19/items/7b4a491e2399aa5cf7c9
 
-- However, URDF for body ans new ROS control plugin.
+- However, URDF for body and new ROS control plugin.
 
 - Install
   ```
