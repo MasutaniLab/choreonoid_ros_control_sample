@@ -4,7 +4,8 @@
 
 - However, URDF for body and new ROS control plugin.
 
-- Install
+- Install  
+  `$ws` means path of your work space.
   ```
   mkdir -p $ws/src
   cd $ws/src
